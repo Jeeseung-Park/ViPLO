@@ -14,7 +14,6 @@ import torch
 import numpy as np
 from tqdm import tqdm
 import torch.distributed as dist
-import cv2
 
 
 from torch.utils.data import Dataset
@@ -24,16 +23,15 @@ from torchvision.transforms import ColorJitter
 
 from torch.utils.data.dataset import IterableDataset
 
-from vcoco.vcoco import VCOCO
 from pycocotools.coco import COCO
 
 from hicodet.hicodet import HICODet
 
-from PIL import Image
+
 import pocket
 from pocket.core import DistributedLearningEngine
 from pocket.utils import DetectionAPMeter, HandyTimer, BoxPairAssociation, all_gather
-from pocket.data import StandardTransform
+
 
 
 def custom_collate(batch):

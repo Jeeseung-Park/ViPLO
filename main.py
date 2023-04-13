@@ -175,7 +175,7 @@ if __name__ == '__main__':
     parser.add_argument('--num-workers', default=4, type=int)
     parser.add_argument('--print-interval', default=300, type=int)
     parser.add_argument('--checkpoint-path', default='', type=str)
-    parser.add_argument('--cache-dir', type=str, default='./checkpoints/resnet_50_clip')
+    parser.add_argument('--cache-dir', type=str, default='./checkpoints/train')
     parser.add_argument('--num-class', default=117, type=int)
     parser.add_argument('--poseoff', action='store_true')
 
