@@ -11,7 +11,7 @@ out
 temp*
 checkpoints
 
-CLIP
+#CLIP
 
 hicodet/detections/test2015
 hicodet/detections/test2015_gt
