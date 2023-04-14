@@ -14,7 +14,7 @@ CLIP (Contrastive Language-Image Pre-Training) is a neural network trained on a 
 
 ## Usage
 
-First, [install PyTorch 1.7.1](https://pytorch.org/get-started/locally/) and torchvision, as well as small additional dependencies, and then install this repo as a Python package. On a CUDA GPU machine, the following will do the trick:
+First, [install PyTorch 1.7.1](https://pytorch.org/get-started/locally/) (or later) and torchvision, as well as small additional dependencies, and then install this repo as a Python package. On a CUDA GPU machine, the following will do the trick:
 
 ```bash
 $ conda install --yes -c pytorch pytorch=1.7.1 torchvision cudatoolkit=11.0
@@ -186,8 +186,14 @@ classifier.fit(train_features, train_labels)
 
 # Evaluate using the logistic regression classifier
 predictions = classifier.predict(test_features)
-accuracy = np.mean((test_labels == predictions).astype(np.float)) * 100.
+accuracy = np.mean((test_labels == predictions).astype(float)) * 100.
 print(f"Accuracy = {accuracy:.3f}")
 ```
 
 Note that the `C` value should be determined via a hyperparameter sweep using a validation split.
+
+
+## See Also
+
+* [OpenCLIP](https://github.com/mlfoundations/open_clip): includes larger and independently trained CLIP models up to ViT-G/14
+* [Hugging Face implementation of CLIP](https://huggingface.co/docs/transformers/model_doc/clip): for easier integration with the HF ecosystem

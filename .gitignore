@@ -26,3 +26,5 @@ hicodet/detections/download_checkpoint.sh
 hicodet/instances_test2015_vitpose.json
 hicodet/instances_train2015_vitpose.json
 hicodet/hico_20160224_det
+
+CLIP2
