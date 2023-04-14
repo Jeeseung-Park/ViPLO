@@ -796,8 +796,6 @@ class GraphHead(Module):
             # Skip image when there are no detected human or object instances
             # and when there is only one detected instance
             if n_h == 0 or n <= 1:
-                if self.training:
-                    print("not enough detection!!!")
                 if self.pose:
                     all_box_pair_local_features.append(torch.zeros(
                         0, 1 * self.representation_size,
