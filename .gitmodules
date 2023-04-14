@@ -5,3 +5,4 @@
 [submodule "ViTPose"]
 	path = ViTPose
 	url = https://github.com/Jeeseung-Park/ViTPose
+	branch = hicodet_inference
