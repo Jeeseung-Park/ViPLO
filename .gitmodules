@@ -1,3 +1,4 @@
 [submodule "CLIP"]
 	path = CLIP
 	url = https://github.com/Jeeseung-Park/CLIP
+	branch = MOA_module
