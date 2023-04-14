@@ -2,3 +2,6 @@
 	path = CLIP
 	url = https://github.com/Jeeseung-Park/CLIP
 	branch = MOA_module
+[submodule "ViTPose"]
+	path = ViTPose
+	url = https://github.com/Jeeseung-Park/ViTPose
