@@ -23,21 +23,7 @@ Step 2: Install the CLIP with our MOA module added via `pip install ./CLIP`
 Step 3: Install the lightweight deep learning library [Pocket](https://github.com/fredzzhang/pocket)
 
 
-## Pretrained pickle
-
-[CIFAR-10](https://drive.google.com/file/d/1z7sNrq_iGXgt3Tzl3NxRTEXHKdw_AzSZ/view?usp=sharing)
-Styleformer-Large with FID 2.82 IS 9.94
-
-[STL-10](https://drive.google.com/file/d/1fpWR9sOQA5KApeGlP7hWTi8S6bpcn5Bt/view?usp=sharing)
-Styleformer-Medium with FID 15.17 IS 11.01 
-
-[CelebA](https://drive.google.com/file/d/1nyYxhRKE-kNMFRO5Ijx8N_1KOSX5jh_V/view?usp=sharing)
-Styleformer-Linformer with FID 3.66
-
-[LSUN-Church](https://drive.google.com/file/d/1X3yPt__srOuK8pRr0z4GKvtyjnEKYQOU/view?usp=sharing)
-Styleformer-Linformer with FID 7.99
-
-## Generating images
+## Preparing datasets
 
 Pre-trained networks are stored as `*.pkl` files that can be referenced using local filenames
 
@@ -51,6 +37,22 @@ Outputs from the above commands are placed under `out/*.png`, controlled by `--o
 
 
 ## Preparing datasets
+
+Step 1: Download the HICO-DET dataset. 
+```.bash
+bash hicodet/download.sh 
+```
+
+Step 2: Run a Faster R-CNN pre-trained on MS COCO to generate detections & Generate ground truth detections for test. 
+```.bash
+python hicodet/detections/preprocessing.py --partition train2015
+python hicodet/detections/preprocessing.py --partition test2015
+python hicodet/detections/generate_gt_detections.py --partition test2015 
+
+```
+
+Step 3: 
+
 
 
 **CIFAR-10**: Download the [CIFAR-10 python version](https://www.cs.toronto.edu/~kriz/cifar.html) and convert to ZIP archive:
