@@ -36,7 +36,7 @@ python generate.py --outdir=out --seeds=100-105 \
 Outputs from the above commands are placed under `out/*.png`, controlled by `--outdir`. Downloaded network pickles are cached under `$HOME/.cache/dnnlib`, which can be overridden by setting the `DNNLIB_CACHE_DIR` environment variable. The default PyTorch extension build directory is `$HOME/.cache/torch_extensions`, which can be overridden by setting `TORCH_EXTENSIONS_DIR`.
 
 
-## Preparing datasets
+## Preparing datasets (HICO-DET)
 
 Step 1: Download the HICO-DET dataset. 
 ```.bash
@@ -51,8 +51,10 @@ python hicodet/detections/generate_gt_detections.py --partition test2015
 
 ```
 
-Step 3: 
+Step 3: Generate fine-tuned detections from DETR-based detector, [UPT](https://github.com/fredzzhang/upt). 
+```.bash
 
+```
 
 
 **CIFAR-10**: Download the [CIFAR-10 python version](https://www.cs.toronto.edu/~kriz/cifar.html) and convert to ZIP archive:
