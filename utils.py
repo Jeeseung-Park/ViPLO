@@ -56,7 +56,7 @@ class DataFactory(Dataset):
         
         self.pose = pose
 
-        if name not in ['hicodet', 'vcoco']:
+        if name not in ['hicodet']:
             raise ValueError("Unknown dataset ", name)
         
         if name == 'hicodet':
@@ -69,22 +69,7 @@ class DataFactory(Dataset):
             )
             self.human_idx = 49
         else:
-            assert partition in ['train', 'val', 'trainval', 'test'], \
-                "Unknown V-COCO partition " + partition
-            image_dir = dict(
-                train='mscoco2014/train2014',
-                val='mscoco2014/train2014',
-                trainval='mscoco2014/train2014',
-                test='mscoco2014/val2014'
-            )
-            self.dataset = VCOCO(
-                root=os.path.join(data_root, image_dir[partition]),
-                anno_file=os.path.join(data_root, 'instances_vcoco_{}_vitpose.json'.format(partition)
-                ), target_transform=pocket.ops.ToTensor(input_format='dict')
-            )
-            self.coco = COCO("v-coco/data/instances_vcoco_all_2014.json")
-
-            self.human_idx = 1
+            raise ValueError("Unknown dataset ", name)
 
         self.name = name
         self.detection_root = detection_root
