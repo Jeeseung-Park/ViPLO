@@ -10,7 +10,3 @@
 	path = hicodet
 	url = https://github.com/Jeeseung-Park/hicodet
 	branch = hicodet_with_pose 
-[submodule "upt"]
-	path = upt
-	url = https://github.com/Jeeseung-Park/upt
-	branch = hicodet_generation
