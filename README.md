@@ -40,8 +40,7 @@ python hicodet/detections/generate_gt_detections.py --partition test2015
 
 **Step 3**: For generating fine-tuned detections and human pose (keypoints), we recommend just downloading pre-inferenced detection/keypoint proposals with the script below. Then **you can skip Steps 4 and 5**, which can take a long time. 
 ```.bash
-bash download/download_upt_weight.sh 
-python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
+bash download/download_det_pose.sh
 ```
 
 **Step 4**: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
