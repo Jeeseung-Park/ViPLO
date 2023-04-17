@@ -16,11 +16,11 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 
 ## Installation
 
-Step 1: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive`
+**Step 1**: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive`
 
-Step 2: Install the CLIP with our MOA module added via `pip install ./CLIP`
+**Step 2**: Install the CLIP with our MOA module added via `pip install ./CLIP`
 
-Step 3: Install the lightweight deep learning library [Pocket](https://github.com/fredzzhang/pocket)
+**Step 3**: Install the lightweight deep learning library [Pocket](https://github.com/fredzzhang/pocket)
 
 
 ## Preparing datasets (HICO-DET)
@@ -38,13 +38,19 @@ python hicodet/detections/generate_gt_detections.py --partition test2015
 
 ```
 
-**Step 3**: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
+**Step 3**: For generating fine-tuned detections and human pose (keypoints), we recommend just downloading pre-inferenced detection/keypoint proposals with the below script. Then you can **skip Steps 4 and 5**, which can take a long time. 
 ```.bash
 bash download/download_upt_weight.sh 
 python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
 ```
 
-**Step 4**: Estimate the human pose for detection and GT annotation, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
+**Step 4**: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
+```.bash
+bash download/download_upt_weight.sh 
+python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
+```
+
+**Step 5**: Estimate the human pose for detection and GT annotation, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
 ```.bash
 bash download/download_vitpose_weight.sh 
 # Estimate human pose for detections. 
