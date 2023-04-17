@@ -76,6 +76,12 @@ python test.py --detection-dir hicodet/detections/test2015_upt_vitpose --model-p
 python test.py --detection-dir hicodet/detections/test2015_gt_vitpose --model-path checkpoints/best_hicodet.pt 
 ```
 
+| Detections         | Full (D) |Rare (D)|Non-rare (D)|Full(KO)|Rare (KO)|Non-rare (KO)|
+|:-------------------|:--------:| :---: | :---: | :---: |:-------:|:-----------:| 
+| Fine-tuned detections   |  37.22   | 35.45 |37.75 | 40.61|  38.82  |    41.15    | [
+| GT detections |  34.63   | 30.04|  36.01|  -   |   -  |  -  | 
+
+D: Default, KO: Known object
 
 ## Training new networks (HICO-DET)
 
