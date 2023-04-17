@@ -12,7 +12,7 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 
 * We have done all testing and development using 4 RTX 3090 GPUs with 24GB.
 * We recommend using Docker, with nvcr.io/nvidia/pytorch:21.06-py3 Image file. Please refer to [NVIDIA docs](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) for more detail. 
-* Additional python libraries: `pip instal gdown einops `. 
+* Additional python libraries: `pip instal gdown einops ujson`. 
 
 ## Installation
 
