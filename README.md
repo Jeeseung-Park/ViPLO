@@ -12,7 +12,7 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 
 * We have done all testing and development using 4 RTX 3090 GPUs with 24GB.
 * We recommend using Docker, with nvcr.io/nvidia/pytorch:21.06-py3 Image file. Please refer to [NVIDIA docs](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) for more detail. 
-* Additional python libraries: `pip instal gdown requests tqdm pyspng ninja imageio-ffmpeg==0.4.3`. 
+* Additional python libraries: `pip instal gdown einops ujson`. 
 
 ## Installation
 
@@ -46,7 +46,7 @@ bash download/download_det_pose.sh
 **Step 4**: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
 ```.bash
 bash download/download_upt_weight.sh 
-python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
+python upt/upt_generate_detection_hicodet.py --pretrained upt/checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
 ```
 
 **Step 5**: Estimate the human pose for detection and GT annotation, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
@@ -90,7 +90,7 @@ In its most basic form, training new networks boils down to:
 
 ```.bash
 # Training the small version of VIPLO
-python train.py --cache-dir ~/checkpoints/hicodet_train --world-size 4 --batch-size 32 --patch-size 32 
+python main.py --cache-dir ~/checkpoints/hicodet_train --world-size 4 --batch-size 32 --patch-size 32 
 ```
 
 Additional command line options allow you to train a customized model:
