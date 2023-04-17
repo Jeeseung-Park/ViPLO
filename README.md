@@ -12,11 +12,11 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 
 * We have done all testing and development using 4 RTX 3090 GPUs with 24GB.
 * We recommend using Docker, with nvcr.io/nvidia/pytorch:21.06-py3 Image file. Please refer to [NVIDIA docs](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) for more detail. 
-* Additional python libraries: `pip install click requests tqdm pyspng ninja imageio-ffmpeg==0.4.3`. 
+* Additional python libraries: `pip instal gdown requests tqdm pyspng ninja imageio-ffmpeg==0.4.3`. 
 
 ## Installation
 
-**Step 1**: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive`
+**Step 1**: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive ? `
 
 **Step 2**: Install the CLIP with our MOA module added via `pip install ./CLIP`
 
