@@ -63,51 +63,48 @@ python ViTPose/hicodet_instance_vitpose.py --image_dir hicodet/hico_20160224_det
 ```
 
 
-## Training new networks
+## Evaluation (HICO-DET)
+
+You can evaluate pretrained model (VIPLO large) on HICO-DET with the following commands:
+
+```.bash
+# Download pretrained model weight, VIPLO large.
+bash download/download_checkpoint.sh
+# Evaluate on fine-tuned detections
+python test.py --detection-dir hicodet/detections/test2015_upt_vitpose --model-path checkpoints/best_hicodet.pt 
+# Evaluate on GT detections
+python test.py --detection-dir hicodet/detections/test2015_gt_vitpose --model-path checkpoints/best_hicodet.pt 
+```
+
+| Detections         | Full (D) |Rare (D)|Non-rare (D)|Full(KO)|Rare (KO)|Non-rare (KO)|
+|:-------------------|:--------:| :---: | :---: | :---: |:-------:|:-----------:| 
+| Fine-tuned detections   |  37.22   | 35.45 |37.75 | 40.61|  38.82  |    41.15    | [
+| GT detections |  62.09   | 59.26|  62.93|  -   |   -  |  -  | 
+
+D: Default, KO: Known object
+
+## Training new networks (HICO-DET)
+
 
 In its most basic form, training new networks boils down to:
 
 ```.bash
-python train.py --outdir=~/training-runs --data=~/mydataset.zip --gpus=1 --batch=32 --cfg=cifar --g_dict=256,64,16 \
-    --num_layers=1,2,2 --depth=32
+# Training the small version of VIPLO
+python train.py --cache-dir ~/checkpoints/hicodet_train --world-size 4 --batch-size 32 --patch-size 32 
 ```
 
-* `--g_dict=` it means 'Hidden size' in paper, and it must be match with image resolution.
-* `--num_layers=` it means 'Layers' in paper, and it must be match with image resolution.
-* `--depth=32` it means minimum required depth is 32, described in Section 2 at paper.
-* `--linformer=1` apply informer to Styleformer.
+Additional command line options allow you to train a customized model:
 
-Please refer to [`python train.py --help`](./docs/train-help.txt) for the full list. 
-To train STL-10 dataset with same setting at paper, please fix the starting resolution 8x8 to 12x12 at training/networks_Generator.py. 
+* `--patch-size` You can select between 16 (default) and 32, which leads to training the large and small version of VIPLO, respectively. We set the batch size to 24 when training VIPLO large, due to the OOM. 
+* `--poseoff` With this command line, pose information will not be used for training. 
+* `--backbone-name` You can select between 'CLIP' and 'CLIP_CLS' (default), and with 'CLIP' backbone, MOA module will not be used for training (Not recommended). 
 
-
-
-## Quality metrics
-
-Quality metrics can be computed after the training:
-
-```.bash
-# Pre-trained network pickle: specify dataset explicitly, print result to stdout.
-python calc_metrics.py --metrics=fid50k_full --data=~/datasets/lsunchurch.zip \
-    --network=path_to_pretrained_lsunchurch_pkl_file
-    
-python calc_metrics.py --metrics=is50k --data=~/datasets/lsunchurch.zip \
-    --network=path_to_pretrained_lsunchurch_pkl_file    
-```
 
 ## Citation
 If you found our work useful, please don't forget to cite
 ```
-@misc{park2021styleformer,
-      title={Styleformer: Transformer based Generative Adversarial Networks with Style Vector}, 
-      author={Jeeseung Park and Younggeun Kim},
-      year={2021},
-      eprint={2106.07023},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
 ```
 
 
 
-The code is heavily based on the [stylegan2-ada-pytorch implementation](https://github.com/NVlabs/stylegan2-ada-pytorch)
+The code is heavily based on the [spatially-conditioned-graphs implementation](https://github.com/fredzzhang/spatially-conditioned-graphs)
