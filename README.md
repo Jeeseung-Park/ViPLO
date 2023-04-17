@@ -85,6 +85,7 @@ In its most basic form, training new networks boils down to:
 ```.bash
 # Training the small version of VIPLO
 python train.py --cache-dir ~/checkpoints/hicodet_train --world-size 4 --batch-size 32 --patch-size 32 
+```
 
 Additional command line options allow you to train a customized model:
 
