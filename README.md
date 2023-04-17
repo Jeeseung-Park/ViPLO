@@ -46,7 +46,7 @@ bash download/download_det_pose.sh
 **Step 4**: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
 ```.bash
 bash download/download_upt_weight.sh 
-python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
+python upt/upt_generate_detection_hicodet.py --pretrained upt/checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
 ```
 
 **Step 5**: Estimate the human pose for detection and GT annotation, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
