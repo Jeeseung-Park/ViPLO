@@ -23,19 +23,6 @@ Step 2: Install the CLIP with our MOA module added via `pip install ./CLIP`
 Step 3: Install the lightweight deep learning library [Pocket](https://github.com/fredzzhang/pocket)
 
 
-## Preparing datasets
-
-Pre-trained networks are stored as `*.pkl` files that can be referenced using local filenames
-
-```.bash
-# Generate images using pretrained_weight 
-python generate.py --outdir=out --seeds=100-105 \
-    --network=path_to_pkl_file
-```
-
-Outputs from the above commands are placed under `out/*.png`, controlled by `--outdir`. Downloaded network pickles are cached under `$HOME/.cache/dnnlib`, which can be overridden by setting the `DNNLIB_CACHE_DIR` environment variable. The default PyTorch extension build directory is `$HOME/.cache/torch_extensions`, which can be overridden by setting `TORCH_EXTENSIONS_DIR`.
-
-
 ## Preparing datasets (HICO-DET)
 
 Step 1: Download the HICO-DET dataset. 
@@ -51,9 +38,16 @@ python hicodet/detections/generate_gt_detections.py --partition test2015
 
 ```
 
-Step 3: Generate fine-tuned detections from DETR-based detector, [UPT](https://github.com/fredzzhang/upt). 
+Step 3: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
 ```.bash
+bash download/download_upt_weight.sh 
+python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
+```
 
+Step 4: Estimate the human pose for detection, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
+```.bash
+bash download/download_vitpose_weight.sh 
+python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
 ```
 
 
