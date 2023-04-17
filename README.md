@@ -25,12 +25,12 @@ Step 3: Install the lightweight deep learning library [Pocket](https://github.co
 
 ## Preparing datasets (HICO-DET)
 
-Step 1: Download the HICO-DET dataset. 
+**Step 1**: Download the HICO-DET dataset. 
 ```.bash
 bash hicodet/download.sh 
 ```
 
-Step 2: Run a Faster R-CNN pre-trained on MS COCO to generate detections & Generate ground truth detections for test. 
+**Step 2**: Run a Faster R-CNN pre-trained on MS COCO to generate detections & Generate ground truth detections for test. 
 ```.bash
 python hicodet/detections/preprocessing.py --partition train2015
 python hicodet/detections/preprocessing.py --partition test2015
@@ -38,48 +38,24 @@ python hicodet/detections/generate_gt_detections.py --partition test2015
 
 ```
 
-Step 3: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
+**Step 3**: Generate fine-tuned detections for test2015 from DETR-based detector [UPT](https://github.com/fredzzhang/upt). 
 ```.bash
 bash download/download_upt_weight.sh 
 python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
 ```
 
-Step 4: Estimate the human pose for detection, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
+**Step 4**: Estimate the human pose for detection and GT annotation, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
 ```.bash
 bash download/download_vitpose_weight.sh 
-python upt/upt_generate_detection_hicodet.py --pretrained checkpoints/detr-r101-dc5-hicodet.pth --backbone resnet101 --dilation
+# Estimate human pose for detections. 
+python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/train2015 --det_json_dir hicodet/detections/train2015 --det_save_json_dir hicodet/detections/train2015_vitpose 
+python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/test2015 --det_json_dir hicodet/detections/test2015 --det_save_json_dir hicodet/detections/test2015_vitpose
+python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/test2015 --det_json_dir hicodet/detections/test2015_upt --det_save_json_dir hicodet/detections/test2015_upt_vitpose
+python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/test2015 --det_json_dir hicodet/detections/test2015_gt --det_save_json_dir hicodet/detections/test2015_gt_vitpose
+# Estimate human pose for GT annotations. 
+python ViTPose/hicodet_instance_vitpose.py --image_dir hicodet/hico_20160224_det/images/train2015 --gt_json_path hicodet/instances_train2015.json --gt_save_json_path hicodet/instances_train2015_vitpose.json 
+python ViTPose/hicodet_instance_vitpose.py --image_dir hicodet/hico_20160224_det/images/test2015 --gt_json_path hicodet/instances_test2015.json --gt_save_json_path hicodet/instances_test2015_vitpose.json
 ```
-
-
-**CIFAR-10**: Download the [CIFAR-10 python version](https://www.cs.toronto.edu/~kriz/cifar.html) and convert to ZIP archive:
-
-```.bash
-python dataset_tool.py --source=~/downloads/cifar-10-python.tar.gz --dest=~/datasets/cifar10.zip
-```
-
-**STL-10**: Download the stl-10 dataset 5k training, 100k unlabeled images from [STL-10 dataset page](https://cs.stanford.edu/~acoates/stl10/) and convert to ZIP archive:
-
-```.bash
-python dataset_tool.py --source=~/downloads/~ --dest=~/datasets/stl10.zip \
-    ---width=48 --height=48
-```
-
-**CelebA**: Download the CelebA dataset Aligned&Cropped Images from [CelebA dataset page](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) and convert to ZIP archive:
-
-```.bash
-python dataset_tool.py --source=~/downloads/~--dest=~/datasets/stl10.zip \
-    ---width=64 --height=64
-```
-
-
-**LSUN Church**: Download the desired categories(church) from the [LSUN project page](https://www.yf.io/p/lsun/) and convert to ZIP archive:
-
-```.bash
-
-python dataset_tool.py --source=~/downloads/lsun/raw/church_lmdb --dest=~/datasets/lsunchurch.zip \
-    --width=128 --height=128
-```
-
 
 
 ## Training new networks
