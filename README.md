@@ -51,6 +51,7 @@ python upt/upt_generate_detection_hicodet.py --pretrained upt/checkpoints/detr-r
 
 **Step 5**: Estimate the human pose for detection and GT annotation, using off-the-shelf pose estimator [ViTPose](https://github.com/ViTAE-Transformer/ViTPose). 
 ```.bash
+# Weight from official vitpose github
 bash download/download_vitpose_weight.sh 
 # Estimate human pose for detections. 
 python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/train2015 --det_json_dir hicodet/detections/train2015 --det_save_json_dir hicodet/detections/train2015_vitpose 
