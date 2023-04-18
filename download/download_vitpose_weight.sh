@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pip install mmcv==1.5.0
+pip install mmcv-full==1.5.0
 pip install opencv-python==4.5.5.64
 
 DIR=ViTPose/models
