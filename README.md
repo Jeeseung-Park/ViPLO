@@ -2,6 +2,7 @@
 
 ![architecture_image](./docs/overall_arch.png)
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/viplo-vision-transformer-based-pose/human-object-interaction-detection-on-hico)](https://paperswithcode.com/sota/human-object-interaction-detection-on-hico?p=viplo-vision-transformer-based-pose)
 
 **ViPLO: Vision Transformer based Pose-Conditioned Self-Loop Graph for Human-Object Interaction Detection**<br>
 Jeeseung Park, Jin-Woo Park, Jong-Seok Lee<br>
