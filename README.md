@@ -108,6 +108,14 @@ Additional command line options allow you to train a customized model:
 ## Citation
 If you found our work useful, please don't forget to cite
 ```
+@misc{park2023viplo,
+      title={ViPLO: Vision Transformer based Pose-Conditioned Self-Loop Graph for Human-Object Interaction Detection}, 
+      author={Jeeseung Park and Jin-Woo Park and Jong-Seok Lee},
+      year={2023},
+      eprint={2304.08114},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
 
 
