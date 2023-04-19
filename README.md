@@ -57,6 +57,7 @@ python upt/upt_generate_detection_hicodet.py --pretrained upt/checkpoints/detr-r
 ```.bash
 # Weight from official vitpose github
 bash download/download_vitpose_weight.sh 
+apt-get install libgl1-mesa-glx
 # Estimate human pose for detections. 
 python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/train2015 --det_json_dir hicodet/detections/train2015 --det_save_json_dir hicodet/detections/train2015_vitpose 
 python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/test2015 --det_json_dir hicodet/detections/test2015 --det_save_json_dir hicodet/detections/test2015_vitpose
