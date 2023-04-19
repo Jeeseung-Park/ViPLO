@@ -2,9 +2,11 @@
 
 ![architecture_image](./docs/overall_arch.png)
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/viplo-vision-transformer-based-pose/human-object-interaction-detection-on-hico)](https://paperswithcode.com/sota/human-object-interaction-detection-on-hico?p=viplo-vision-transformer-based-pose)
 
 **ViPLO: Vision Transformer based Pose-Conditioned Self-Loop Graph for Human-Object Interaction Detection**<br>
 Jeeseung Park, Jin-Woo Park, Jong-Seok Lee<br>
+https://arxiv.org/abs/2304.08114<br>
 
 Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers relationships between human and objects, plays an important role in scene understanding. Although two-stage HOI detectors have advantages of high efficiency in training and inference, they suffer from lower performance than one-stage methods due to the old backbone networks and the lack of considerations for the HOI perception process of humans in the interaction classifiers. In this paper, we propose Vision Transformer based Pose-Conditioned Self-Loop Graph (ViPLO) to resolve these problems. First, we propose a novel feature extraction method suitable for the Vision Transformer backbone, called masking with overlapped area (MOA) module. The MOA module utilizes the overlapped area between each patch and the given region in the attention function, which addresses the quantization problem when using the Vision Transformer backbone. In addition, we design a graph with a pose-conditioned self-loop structure, which updates the human node encoding with local features of human joints. This allows the classifier to focus on specific human joints to effectively identify the type of interaction, which is motivated by the human perception process for HOI. As a result, ViPLO achieves the state-of-the-art results on two public benchmarks, especially obtaining a +2.07 mAP performance gain on the HICO-DET dataset.*
 
@@ -12,11 +14,11 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 
 * We have done all testing and development using 4 RTX 3090 GPUs with 24GB.
 * We recommend using Docker, with nvcr.io/nvidia/pytorch:21.06-py3 Image file. Please refer to [NVIDIA docs](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) for more detail. 
-* Additional python libraries: `pip instal gdown einops ujson timm munkres`. 
+* Additional python libraries: `pip install gdown einops ujson timm munkres`. 
 
 ## Installation
 
-**Step 1**: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive ? `
+**Step 1**: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive`
 
 **Step 2**: Install the CLIP with our MOA module added via `pip install ./CLIP`
 
@@ -29,6 +31,8 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 ```.bash
 bash hicodet/download.sh 
 ```
+If the above script does not work, you can download from [Google Drive](https://drive.google.com/open?id=1QZcJmGVlF9f4h-XLWe9Gkmnmj2z1gSnk), then unpack the tarball (hico_20160224_det.tar.gz) under the 'hicodet' folder. (ex. `./hicodet/hico_20160224_det/images/test2015/...`)
+
 
 **Step 2**: Run a Faster R-CNN pre-trained on MS COCO to generate detections & Generate ground truth detections for test. 
 ```.bash
@@ -53,6 +57,7 @@ python upt/upt_generate_detection_hicodet.py --pretrained upt/checkpoints/detr-r
 ```.bash
 # Weight from official vitpose github
 bash download/download_vitpose_weight.sh 
+apt-get install libgl1-mesa-glx
 # Estimate human pose for detections. 
 python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/train2015 --det_json_dir hicodet/detections/train2015 --det_save_json_dir hicodet/detections/train2015_vitpose 
 python ViTPose/hicodet_detection_vitpose.py --image_dir hicodet/hico_20160224_det/images/test2015 --det_json_dir hicodet/detections/test2015 --det_save_json_dir hicodet/detections/test2015_vitpose
@@ -104,6 +109,14 @@ Additional command line options allow you to train a customized model:
 ## Citation
 If you found our work useful, please don't forget to cite
 ```
+@misc{park2023viplo,
+      title={ViPLO: Vision Transformer based Pose-Conditioned Self-Loop Graph for Human-Object Interaction Detection}, 
+      author={Jeeseung Park and Jin-Woo Park and Jong-Seok Lee},
+      year={2023},
+      eprint={2304.08114},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
 
 
