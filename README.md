@@ -18,7 +18,7 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 
 ## Installation
 
-**Step 1**: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive ? `
+**Step 1**: Download the repository and its' submodules. `git clone https://github.com/Jeeseung-Park/ViPLO`, `git submodule update --init --recursive`
 
 **Step 2**: Install the CLIP with our MOA module added via `pip install ./CLIP`
 
