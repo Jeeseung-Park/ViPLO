@@ -96,13 +96,14 @@ In its most basic form, training new networks boils down to:
 
 ```.bash
 # Training the small version of VIPLO
-python main.py --cache-dir ~/checkpoints/hicodet_train --world-size 4 --batch-size 32 --patch-size 32 
+python main.py --cache-dir ~/checkpoints/hicodet_train --world-size 4 --batch-size 8 --patch-size 32 
 ```
 
 Additional command line options allow you to train a customized model:
 
 * `--patch-size` You can select between 16 (default) and 32, which leads to training the large and small version of VIPLO, respectively. We set the batch size to 24 when training VIPLO large, due to the OOM. 
 * `--poseoff` With this command line, pose information will not be used for training. 
+* `--batch-size` Batch size for each subprocess.
 * `--backbone-name` You can select between 'CLIP' and 'CLIP_CLS' (default), and with 'CLIP' backbone, MOA module will not be used for training (Not recommended). 
 
 
