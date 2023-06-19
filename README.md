@@ -29,7 +29,9 @@ Abstract: *Human-Object Interaction (HOI) detection, which localizes and infers 
 
 **Step 1**: Download the HICO-DET dataset. 
 ```.bash
-bash hicodet/download.sh 
+cd hicodet
+bash download.sh 
+cd ../
 ```
 If the above script does not work, you can download from [Google Drive](https://drive.google.com/open?id=1QZcJmGVlF9f4h-XLWe9Gkmnmj2z1gSnk), then unpack the tarball (hico_20160224_det.tar.gz) under the 'hicodet' folder. (ex. `./hicodet/hico_20160224_det/images/test2015/...`)
 
